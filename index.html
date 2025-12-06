@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Parasol Vacations — Secure Your Booking</title>
+  <style>
+    /* Simple, clean styles */
+    :root{
+      --accent:#0b76d1;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    body{margin:0;background:var(--bg);color:#111;}
+    header{background:#fff;border-bottom:1px solid #e6e9ef}
+    .container{max-width:1100px;margin:0 auto;padding:20px;}
+    nav{display:flex;align-items:center;gap:20px;}
+    .logo{font-weight:700;color:var(--accent);font-size:20px;}
+    .nav-links{margin-left:auto;display:flex;gap:12px;align-items:center}
+    .btn{background:var(--accent);color:#fff;padding:10px 14px;border-radius:6px;text-decoration:none;display:inline-block}
+    .layout{display:grid;grid-template-columns:1fr 380px;gap:24px;padding:28px 0}
+    .card{background:var(--card);border-radius:12px;padding:18px;box-shadow:0 8px 20px rgba(15,23,42,0.03)}
+    h1,h2,h3{margin:0 0 12px 0}
+    p{margin:0 0 10px 0;color:var(--muted)}
+    .muted{color:var(--muted);font-size:14px}
+    .trip-list{list-style:none;padding:0;margin:10px 0 0 0}
+    .trip-list li{display:flex;gap:10px;padding:8px 0;border-top:1px dashed #f0f2f5}
+    .price{font-size:20px;font-weight:700}
+    .small{font-size:13px;color:var(--muted)}
+    label{display:block;font-weight:600;margin:8px 0 6px}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;background:#fff;box-sizing:border-box}
+    .checkout-total{display:flex;justify-content:space-between;align-items:center;padding-top:12px}
+    .countdown{font-weight:700;color:#d9534f}
+    .consent{font-size:13px;color:#555;margin-top:10px}
+    footer{padding:20px 0;margin-top:20px;text-align:center;color:var(--muted);font-size:13px}
+    @media (max-width:900px){
+      .layout{grid-template-columns:1fr; padding-bottom:30px}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container" style="display:flex;align-items:center;gap:16px">
+      <div class="logo">Parasol Vacations</div>
+      <nav class="nav-links">
+        <a href="#" class="small">Vacation Packages</a>
+        <a href="#" class="small">About</a>
+        <a href="#" class="small">FAQ</a>
+        <a href="mailto:support@parasolvacations.com" class="small">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section class="card" aria-labelledby="booking-head">
+      <h1 id="booking-head">Review Details and Secure Your Booking</h1>
+      <p class="muted">You picked a great option! Confirm traveler details below to activate your Parasol Vacations special offer.</p>
+
+      <div style="display:flex;gap:16px;align-items:center;margin-top:14px">
+        <div style="flex:1">
+          <h3>Tell Us Who Is Traveling</h3>
+          <form id="traveler-form" onsubmit="return false;">
+            <label for="fullname">Full name</label>
+            <input id="fullname" name="fullname" placeholder="First Last" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" placeholder="(555) 555-5555" required>
+
+            <label for="how">How did you hear about us?</label>
+            <select id="how" name="how">
+              <option>Google</option>
+              <option>Facebook</option>
+              <option>Friend</option>
+              <option>TripAdvisor</option>
+              <option>Other</option>
+            </select>
+
+            <div class="consent">
+              <input type="checkbox" id="consent" required>
+              <label for="consent" style="display:inline;font-weight:600">I consent to receive booking & service messages from Parasol Vacations regarding this reservation.</label>
+            </div>
+
+            <div style="margin-top:12px">
+              <button class="btn" onclick="continueBooking()">CONTINUE</button>
+            </div>
+          </form>
+        </div>
+
+        <div style="width:220px;text-align:center">
+          <div class="small">Your room is reserved for</div>
+          <div class="countdown" id="timer">00 : 00 : 00</div>
+          <div class="small" style="margin-top:8px">Hurry — special offers are limited</div>
+        </div>
+      </div>
+
+      <hr style="margin:18px 0;border:none;border-top:1px solid #f0f2f5">
+
+      <div style="display:flex;gap:18px;align-items:flex-start">
+        <div style="flex:1">
+          <h3>Review details and activate your special offer vacation</h3>
+          <p class="muted">Please verify the trip summary and total before continuing to payment.</p>
+
+          <div class="card" style="margin-top:12px">
+            <h4 style="margin-bottom:6px">Trip Summary</h4>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="flex:1">
+                <strong>Wingate by Wyndham New York Midtown South / 5th Ave</strong>
+                <div class="small" style="margin-top:6px">New York, NY</div>
+
+                <ul class="trip-list" aria-hidden="false">
+                  <li><span style="flex:1">5 Days / 4 Nights Accommodations</span></li>
+                  <li><span style="flex:1">Prime location — close to Fifth Avenue & Empire State Building</span></li>
+                  <li><span style="flex:1">Includes a $300 Attractions or Show Tickets Credit</span></li>
+                  <li><span style="flex:1">Buy Now & Travel Anytime within the next 18 months</span></li>
+                </ul>
+              </div>
+              <div style="width:120px;text-align:right">
+                <div class="price" id="example-price">$228</div>
+                <div class="small">4 Nights</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <aside style="width:340px">
+          <div class="card">
+            <h4>Booking Summary</h4>
+            <div style="display:flex;justify-content:space-between;padding:8px 0"><div class="small">Package rate</div><div class="small" id="rate">$228.00</div></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0"><div class="small">Booking fee</div><div class="small" id="booking-fee">$19.73</div></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0"><div class="small">Hotel protection plan</div><div class="small" id="hpp">$19.95</div></div>
+            <div style="display:flex;justify-content:space-between;padding:8px 0"><div class="small">Maximize travel with points</div><div class="small" id="points">$17.00</div></div>
+
+            <div class="checkout-total" style="border-top:1px solid #f0f2f5;margin-top:12px;padding-top:12px">
+              <div class="small">Total</div>
+              <div style="text-align:right">
+                <div style="font-weight:700;font-size:18px" id="total-amount">$284.68</div>
+                <div class="small">USD</div>
+              </div>
+            </div>
+
+            <div style="margin-top:12px">
+              <button class="btn" style="width:100%" onclick="handleBuy()">BUY NOW</button>
+            </div>
+
+            <div class="small" style="margin-top:10px;color:var(--muted)">
+              Resort preview rate: This special rate may include a short informational presentation about vacation ownership options. There is no obligation to buy. See terms & conditions.
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:12px;text-align:center">
+            <div style="font-weight:700">Congratulations!</div>
+            <div class="small" style="margin-top:6px">You're getting the lowest possible rate. We guarantee it.</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px">
+      <div class="small">Parasol Vacations • support@parasolvacations.com • Toll-free reservations: 844-481-3144 (Mon–Sat 8am–5pm)</div>
+      <div class="small" style="margin-top:6px">© <span id="year"></span> Parasol Vacations. All rights reserved.</div>
+    </footer>
+  </main>
+
+  <script>
+    // Countdown: set to 15 minutes (example)
+    const end = Date.now() + (15 * 60 * 1000);
+    function updateTimer() {
+      const diff = Math.max(0, end - Date.now());
+      const mm = String(Math.floor(diff / 60000)).padStart(2,'0');
+      const ss = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+      document.getElementById('timer').textContent = mm + ' : ' + ss;
+      if(diff>0) requestAnimationFrame(updateTimer);
+    }
+    updateTimer();
+
+    // Calculate totals (simple example)
+    function calculateTotal(){
+      const rate = parseFloat(document.getElementById('rate').textContent.replace('$','')) || 0;
+      const fee = parseFloat(document.getElementById('booking-fee').textContent.replace('$','')) || 0;
+      const hpp = parseFloat(document.getElementById('hpp').textContent.replace('$','')) || 0;
+      const pts = parseFloat(document.getElementById('points').textContent.replace('$','')) || 0;
+      const total = (rate + fee + hpp + pts).toFixed(2);
+      document.getElementById('total-amount').textContent = '$' + total;
+    }
+    calculateTotal();
+
+    // Button handlers (placeholder)
+    function continueBooking(){
+      // validate form quickly
+      const name = document.getElementById('fullname').value.trim();
+      if(!name){ alert('Please enter full name to continue.'); return; }
+      alert('Details saved. Click BUY NOW to complete your reservation.');
+    }
+    function handleBuy(){
+      // In production you'd send data to server or proceed to payment.
+      alert('Proceeding to payment (this is a demo page). For help, email support@parasolvacations.com or call 844-481-3144.');
+    }
+
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
